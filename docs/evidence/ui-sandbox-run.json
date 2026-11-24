@@ -1,0 +1,11 @@
+{
+  "stats": {
+    "startTime": "2026-11-24T18:40:02.810Z",
+    "duration": 4252.236,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  },
+  "blocker": "Error: browserType.launch: Target page, context or browser has been closed\n[pid=6106][err] [1124/204004.562540:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer.6106: Permission denied (1100)\n\u001b[2m  - [pid=6106][err] [1124/204004.562540:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer.6106: Permission denied (1100)\u001b[22m\n\u001b[2m  - [pid=6106] exception while trying to kill process: Error: kill EPERM\u001b[22m"
+}

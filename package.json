@@ -1,0 +1,22 @@
+{
+  "name": "qa-automation-engineer-middle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright TypeScript UI and API automation assignment",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --project=ui",
+    "test:api": "playwright test --project=api",
+    "test:bugs": "playwright test --project=known-bugs",
+    "test:headed": "playwright test --project=ui --headed",
+    "test:debug": "playwright test --project=ui --debug",
+    "typecheck": "tsc --noEmit",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3"
+  }
+}

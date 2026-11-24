@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-11-24T18:41:47.590Z",
+  "method": "CUA browser verification; not a Playwright Test runner result",
+  "submitted": {
+    "firstName": "   ",
+    "lastName": "   ",
+    "postalCode": "   "
+  },
+  "overviewUrl": "https://www.saucedemo.com/checkout-step-two.html",
+  "finalUrl": "https://www.saucedemo.com/checkout-complete.html",
+  "confirmation": "Thank you for your order!"
+}

@@ -1,0 +1,13 @@
+{
+  "observedAt": "2026-11-24T18:38:07Z",
+  "method": "POST",
+  "url": "https://restful-booker.herokuapp.com/booking",
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  "requestBody": {},
+  "actualStatus": 500,
+  "actualBody": "Internal Server Error",
+  "expected": "4xx validation error; exact status and schema need product agreement"
+}

@@ -1,0 +1,100 @@
+{
+  "observedAt": "2026-11-24T18:42:51.675Z",
+  "method": "CUA browser actions and DOM assertions; separate from Playwright Test runner",
+  "checks": [
+    {
+      "check": "Sort az",
+      "result": "pass",
+      "values": [
+        "Sauce Labs Backpack",
+        "Sauce Labs Bike Light",
+        "Sauce Labs Bolt T-Shirt",
+        "Sauce Labs Fleece Jacket",
+        "Sauce Labs Onesie",
+        "Test.allTheThings() T-Shirt (Red)"
+      ]
+    },
+    {
+      "check": "Sort za",
+      "result": "pass",
+      "values": [
+        "Test.allTheThings() T-Shirt (Red)",
+        "Sauce Labs Onesie",
+        "Sauce Labs Fleece Jacket",
+        "Sauce Labs Bolt T-Shirt",
+        "Sauce Labs Bike Light",
+        "Sauce Labs Backpack"
+      ]
+    },
+    {
+      "check": "Sort lohi",
+      "result": "pass",
+      "values": [
+        7.99,
+        9.99,
+        15.99,
+        15.99,
+        29.99,
+        49.99
+      ]
+    },
+    {
+      "check": "Sort hilo",
+      "result": "pass",
+      "values": [
+        49.99,
+        29.99,
+        15.99,
+        15.99,
+        9.99,
+        7.99
+      ]
+    },
+    {
+      "check": "Cart reload",
+      "result": "pass",
+      "items": [
+        "Sauce Labs Backpack",
+        "Sauce Labs Bike Light"
+      ]
+    },
+    {
+      "check": "Cancel checkout",
+      "result": "pass"
+    },
+    {
+      "check": "Checkout totals",
+      "result": "pass",
+      "subtotal": "Item total: $39.98",
+      "tax": "Tax: $3.20",
+      "total": "Total: $43.18"
+    },
+    {
+      "check": "Order completion empties cart",
+      "result": "pass"
+    },
+    {
+      "check": "Remove selected product and then last product",
+      "result": "pass"
+    },
+    {
+      "check": "Invalid password",
+      "result": "pass",
+      "error": "Epic sadface: Username and password do not match any user in this service"
+    },
+    {
+      "check": "Empty username",
+      "result": "pass",
+      "error": "Epic sadface: Username is required"
+    },
+    {
+      "check": "Required checkout fields",
+      "result": "pass",
+      "errors": [
+        "Error: First Name is required",
+        "Error: Last Name is required",
+        "Error: Postal Code is required"
+      ]
+    }
+  ]
+}
