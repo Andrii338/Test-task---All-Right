@@ -48,11 +48,17 @@ function render(plan) {
     throw new Error('Expected a title and 1–40 steps.');
   }
   let assertions = 0;
-  const lines = plan.steps.map((step) => {
+  const lines = plan.steps.flatMap((step) => {
     if (step.op === 'login') return 'await new Shop(page).login();';
     if (!ids.has(step.id)) throw new Error('Unknown SauceDemo locator: ' + step.id);
     const target = 'page.getByTestId(' + JSON.stringify(step.id) + ')';
-    if (step.op === 'click') return 'await ' + target + '.click();';
+    if (step.op === 'click') {
+      const click = 'await ' + target + '.click();';
+      if (step.id === 'item-4-title-link') {
+        return [click, 'await expect(page.getByTestId("back-to-products")).toBeVisible();'];
+      }
+      return click;
+    }
     if (step.op === 'text' && typeof step.value === 'string') {
       assertions++;
       return 'await expect(' + target + ').toHaveText(' + JSON.stringify(step.value) + ');';
