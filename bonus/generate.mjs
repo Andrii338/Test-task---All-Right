@@ -41,6 +41,7 @@ function generatePlan(input) {
   }
 }
 
+// Codex повертає JSON-план. Ця функція перевіряє його кроки й складає з них код Playwright.
 function render(plan) {
   if (plan?.error) throw new Error(String(plan.error));
   if (typeof plan?.title !== 'string' || !plan.title.trim() ||
@@ -54,6 +55,7 @@ function render(plan) {
     const target = 'page.getByTestId(' + JSON.stringify(step.id) + ')';
     if (step.op === 'click') {
       const click = 'await ' + target + '.click();';
+      // Назва й ціна є і в каталозі. Кнопка повернення підтверджує перехід на сторінку товару.
       if (step.id === 'item-4-title-link') {
         return [click, 'await expect(page.getByTestId("back-to-products")).toBeVisible();'];
       }

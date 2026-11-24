@@ -13,6 +13,7 @@ export interface Booking {
 export function bookingData(): Booking {
   return {
     firstname: 'Automation',
+    // UUID у прізвищі відрізняє записи паралельних запусків на спільному демосервісі.
     lastname: `QA-${randomUUID()}`,
     totalprice: 123,
     depositpaid: true,
@@ -43,7 +44,7 @@ export class BookingApi {
     expect(response.status(), 'CreateBooking HTTP status').toBe(200);
     const body = await response.json();
     expect(Number.isInteger(body.bookingid) && body.bookingid > 0).toBe(true);
-    // Register ownership before content assertions so teardown also runs after mismatches.
+    // Запам’ятовуємо власника до перевірки вмісту, щоб у разі помилки фікстура могла прибрати запис.
     this.ownedBookings.set(body.bookingid, data.lastname);
     expect(body.booking).toEqual(data);
     return body.bookingid as number;
@@ -70,6 +71,7 @@ export class BookingApi {
     for (const [id, lastname] of this.ownedBookings) {
       try {
         const current = await this.read(id);
+        // Тест міг уже видалити запис. Якщо ID ще існує, перед видаленням звіряємо прізвище.
         if (current.status() === 404) continue;
         expect(current.status(), `Cleanup read ${id}`).toBe(200);
         expect((await current.json()).lastname, `Refuse to delete booking ${id} owned by another run`).toBe(lastname);
@@ -95,6 +97,7 @@ export const test = base.extend<{ bookingApi: BookingApi }>({
     try {
       await use(api);
     } finally {
+      // Прибираємо бронювання і тоді, коли тест зупинився на невдалій перевірці.
       await api.cleanup();
     }
   },

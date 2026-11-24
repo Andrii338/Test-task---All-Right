@@ -11,6 +11,7 @@ test('API-01 authenticate create read update delete and verify absence', async (
     expect(await response.json()).toEqual(original);
   });
 
+  // Зберігаємо унікальне прізвище, за яким фікстура впізнає це бронювання під час прибирання.
   const updated = {
     ...original, firstname: 'Updated', totalprice: 456, depositpaid: false,
     bookingdates: { checkin: '2027-03-01', checkout: '2027-03-07' },
@@ -20,6 +21,7 @@ test('API-01 authenticate create read update delete and verify absence', async (
     const response = await bookingApi.update(id, updated);
     expect(response.status()).toBe(200);
     expect(await response.json()).toEqual(updated);
+    // Окремий GET перевіряє, що сервер зберіг зміни після PUT.
     const persisted = await bookingApi.read(id);
     expect(persisted.status()).toBe(200);
     expect(await persisted.json()).toEqual(updated);
@@ -39,6 +41,7 @@ test('API-N01 invalid credentials return a reason and no token', async ({ reques
     data: { username: 'admin', password: 'incorrect-password' },
   });
   expect(response.status()).toBe(200);
+  // Restful Booker повертає HTTP 200 навіть за хибного пароля. Відмову видно в тілі відповіді.
   const body = await response.json();
   expect(body).toEqual({ reason: 'Bad credentials' });
   expect(body).not.toHaveProperty('token');
@@ -47,6 +50,7 @@ test('API-N01 invalid credentials return a reason and no token', async ({ reques
 test('API-N02 update without authentication is forbidden and leaves booking unchanged', async ({ bookingApi, request }) => {
   const original = bookingData();
   const id = await bookingApi.create(original);
+  // Прямий запит пропускає авторизацію, яку BookingApi.update додає автоматично.
   const response = await request.put(`/booking/${id}`, {
     data: { ...original, totalprice: 999 },
   });
@@ -60,6 +64,7 @@ test('API-N02 update without authentication is forbidden and leaves booking unch
 test('API-N03 delete with invalid token is forbidden and leaves booking present', async ({ bookingApi, request }) => {
   const original = bookingData();
   const id = await bookingApi.create(original);
+  // Передаємо хибний токен явно. Після відмови GET має повернути початкове бронювання.
   const response = await request.delete(`/booking/${id}`, {
     headers: { Cookie: 'token=invalid-automation-token' },
   });

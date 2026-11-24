@@ -8,6 +8,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
+  // Обмежуємо кількість одночасних тестів, оскільки обидва демосервіси спільні.
   workers: 2,
   timeout: 60_000,
   globalTimeout: 10 * 60_000,
@@ -19,6 +20,7 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/results.json' }],
   ],
   use: {
+    // SauceDemo позначає елементи атрибутом data-test. Саме його шукає getByTestId().
     testIdAttribute: 'data-test',
     actionTimeout: 15_000,
     navigationTimeout: 30_000,

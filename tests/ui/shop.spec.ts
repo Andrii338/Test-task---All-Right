@@ -17,6 +17,7 @@ test('UI-02 catalog displays six products with names prices and images', async (
     await expect(item.getByTestId('inventory-item-name')).not.toHaveText('');
     expect(moneyInCents(await item.getByTestId('inventory-item-price').innerText())).toBeGreaterThan(0);
     await expect(item.getByRole('img')).toBeVisible();
+    // Видимий тег img може містити зламане зображення. naturalWidth підтверджує, що файл завантажився.
     await expect.poll(() => item.getByRole('img').evaluate(
       (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
     ), { message: 'Product image must load successfully' }).toBe(true);
@@ -30,9 +31,11 @@ test('UI-03 all four catalog sort options order the full product list', async ({
   const prices = page.getByTestId('inventory-item-price');
   await expect(names).toHaveCount(6);
   await expect(prices).toHaveCount(6);
+  // Початкові шість товарів дають еталон для всіх чотирьох режимів сортування.
   const originalNames = await names.allTextContents();
   const originalPrices = (await prices.allTextContents()).map(moneyInCents);
 
+  // Каталог відкривається в порядку A–Z. Після Z–A перевірка A–Z вимагає реальної зміни порядку.
   for (const option of ['za', 'az', 'lohi', 'hilo']) {
     await test.step(`Sort ${option}`, async () => {
       await page.getByTestId('product-sort-container').selectOption(option);
@@ -55,6 +58,7 @@ test('UI-04 cart persists on reload and removes only the selected product', asyn
   await shop.add(products.bikeLight.name);
   await expect(page.getByTestId('shopping-cart-badge')).toHaveText('2');
   await shop.openCart();
+  // Після перезавантаження обидві позиції мають зберегтися зі своїми цінами.
   await page.reload();
   await expect(page.getByTestId('inventory-item')).toHaveCount(2);
   await expect(shop.item(products.backpack.name).getByTestId('inventory-item-price')).toHaveText('$29.99');
@@ -78,6 +82,7 @@ test('UI-05 checkout calculates totals completes order and empties cart', async 
   await expect(page.getByTestId('inventory-item-name')).toHaveText([
     products.backpack.name, products.bikeLight.name,
   ]);
+  // Рахуємо очікувану суму за цінами товарів. Податок 8 % округлюємо до найближчого цента.
   const subtotal = products.backpack.priceInCents + products.bikeLight.priceInCents;
   const tax = Math.round(subtotal * 0.08);
   expect(moneyInCents(await page.getByTestId('subtotal-label').innerText())).toBe(subtotal);
@@ -118,6 +123,7 @@ test('UI-N02 empty username is rejected', async ({ page }) => {
 test('UI-N03 checkout requires first name last name and postal code', async ({ shop, page }) => {
   await shop.add(products.backpack.name);
   await shop.startCheckout();
+  // Форма показує перше порожнє поле. Заповнюємо його, щоб перевірити наступне повідомлення.
   for (const [field, message, value] of [
     ['firstName', 'Error: First Name is required', 'Andrii'],
     ['lastName', 'Error: Last Name is required', 'Tester'],

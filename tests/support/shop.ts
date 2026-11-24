@@ -15,6 +15,7 @@ export class Shop {
     await this.page.getByTestId('login-button').click();
   }
 
+  // Звужуємо пошук до картки потрібного товару, бо кнопки різних товарів мають однакові назви.
   item(name: string): Locator {
     return this.page.getByTestId('inventory-item').filter({
       has: this.page.getByTestId('inventory-item-name').filter({ hasText: name }),
@@ -42,6 +43,7 @@ export class Shop {
 }
 
 export function moneyInCents(text: string): number {
+  // Розбираємо долари й центи окремо, щоб грошові порівняння використовували цілі числа.
   const amount = text.match(/\$(\d+)\.(\d{2})\b/);
   if (!amount) throw new Error(`Expected dollar amount, received: ${text}`);
   return Number(amount[1]) * 100 + Number(amount[2]);

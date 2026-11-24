@@ -11,6 +11,7 @@ test('BUG-UI-01 checkout should reject whitespace-only customer information', as
   await page.getByTestId('continue').click();
   const error = page.getByTestId('error');
   const finish = page.getByTestId('finish');
+  // Після Continue чекаємо на один із двох результатів — помилку форми або кнопку Finish на кроці огляду.
   await expect(error.or(finish)).toBeVisible();
 
   const path = new URL(page.url()).pathname;
@@ -24,7 +25,7 @@ test('BUG-UI-01 checkout should reject whitespace-only customer information', as
     body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
   });
 
-  // Keep the expected failure scoped to the known transition to the overview.
+  // Лише остання перевірка може впасти очікувано. Якщо форму виправлять, Playwright повідомить про unexpected pass.
   test.fail(true, 'BUG-UI-01: whitespace-only values open the checkout overview');
   expect(path).toBe('/checkout-step-one.html');
 });
