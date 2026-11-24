@@ -33,6 +33,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], baseURL: uiBaseURL },
     },
     {
+      name: 'generated',
+      testMatch: 'generated/**/*.spec.ts',
+      use: { ...devices['Desktop Chrome'], baseURL: uiBaseURL },
+    },
+    {
       name: 'api',
       testMatch: 'api/**/*.spec.ts',
       use: { baseURL: apiBaseURL, extraHTTPHeaders: { Accept: 'application/json' } },

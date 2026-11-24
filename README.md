@@ -21,10 +21,11 @@ npm run report
 
 | Команда | Призначення |
 | --- | --- |
-| `npm test` | Усі 14 тестів, включно з відомим дефектом |
+| `npm test` | Усі 16 тестів, включно з двома згенерованими тестами й відомим дефектом |
 | `npm run test:ui` | 6 основних і 3 негативні UI-тести |
 | `npm run test:api` | API lifecycle і 3 негативні API-тести; браузер не потрібен |
 | `npm run test:bugs` | Відтворення BUG-UI-01 з `test.fail` |
+| `npm run test:generated` | Два приклади, створені бонусним генератором |
 | `npm run test:headed` | UI-тести з видимим браузером |
 | `npm run test:debug` | Покрокове налагодження UI |
 | `npm run typecheck` | Перевірка TypeScript |
@@ -83,7 +84,7 @@ BUG-UI-01 має явний `test.fail` лише після успішного �
 
 ## Фактична перевірка
 
-Стан на 24 листопада 2026 року:
+Перевірка основного завдання до додавання бонусу, 24 листопада 2026 року:
 
 - TypeScript перевірено; 14 тестів розпізнаються runner-ом.
 - 4 API-тести виконано проти реального Restful Booker успішно.
@@ -136,8 +137,8 @@ curl -i https://restful-booker.herokuapp.com/booking \
 
 ## Свідомо поза обсягом
 
-Firefox, WebKit, мобільні viewport-и, інші користувачі SauceDemo, logout, детальна картка товару, dynamic catalog і PDF-квитанції; visual regression, accessibility-аудит, performance/load/security testing. Для API не покрито PATCH, фільтри списку, XML і form encoding, повну матрицю невалідних payload-ів та конкурентне редагування.
+Firefox, WebKit, мобільні viewport-и, інші користувачі SauceDemo, logout, dynamic catalog і PDF-квитанції; visual regression, accessibility-аудит, performance/load/security testing. Для API не покрито PATCH, фільтри списку, XML і form encoding, повну матрицю невалідних payload-ів та конкурентне редагування.
 
 Це спільні демосервіси: їх перезапуск або стороння зміна даних може зірвати тест. UUID і перевірка власника зменшують ризик. При жорсткому завершенні процесу teardown не гарантований; окремий janitor і виділене тестове середовище не входять у завдання.
 
-Необов’язковий бонусний генератор тестів не реалізовано. Пріоритет — основний обсяг, відтворювані результати та перевірка коду. Взаємодію з ШІ, реальні помилки й виправлення описано в [AI_WORKLOG.md](AI_WORKLOG.md); інструкції агента — у [AGENTS.md](AGENTS.md).
+Бонусний генератор перетворює текстовий тест-кейс на Playwright-тест через headless Codex. [Запуск та приклади](bonus/README.md). Взаємодію з ШІ, реальні помилки й виправлення описано в [AI_WORKLOG.md](AI_WORKLOG.md); інструкції агента — у [AGENTS.md](AGENTS.md).
