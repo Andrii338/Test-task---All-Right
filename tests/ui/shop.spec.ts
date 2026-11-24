@@ -29,10 +29,11 @@ test('UI-03 all four catalog sort options order the full product list', async ({
   const names = page.getByTestId('inventory-item-name');
   const prices = page.getByTestId('inventory-item-price');
   await expect(names).toHaveCount(6);
+  await expect(prices).toHaveCount(6);
   const originalNames = await names.allTextContents();
   const originalPrices = (await prices.allTextContents()).map(moneyInCents);
 
-  for (const option of ['az', 'za', 'lohi', 'hilo']) {
+  for (const option of ['za', 'az', 'lohi', 'hilo']) {
     await test.step(`Sort ${option}`, async () => {
       await page.getByTestId('product-sort-container').selectOption(option);
       await expect(names).toHaveCount(6);
@@ -41,7 +42,7 @@ test('UI-03 all four catalog sort options order the full product list', async ({
         await expect(names).toHaveText(option === 'za' ? sorted.reverse() : sorted);
       } else {
         const sorted = [...originalPrices].sort((a, b) => a - b);
-        expect((await prices.allTextContents()).map(moneyInCents)).toEqual(
+        await expect.poll(async () => (await prices.allTextContents()).map(moneyInCents)).toEqual(
           option === 'hilo' ? sorted.reverse() : sorted,
         );
       }

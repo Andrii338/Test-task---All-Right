@@ -9,13 +9,22 @@ test('BUG-UI-01 checkout should reject whitespace-only customer information', as
     await expect(page.getByTestId(field)).toHaveValue('   ');
   }
   await page.getByTestId('continue').click();
-  // Setup and transport failures must remain ordinary failures, not expected bugs.
-  await expect(page).toHaveURL(/\/checkout-step-(one|two)\.html$/);
+  const error = page.getByTestId('error');
+  const finish = page.getByTestId('finish');
+  await expect(error.or(finish)).toBeVisible();
+
+  const path = new URL(page.url()).pathname;
+  if (path === '/checkout-step-one.html') {
+    await expect(error).toHaveText('Error: First Name is required');
+  } else {
+    await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+    await expect(finish).toBeVisible();
+  }
   await testInfo.attach('checkout-after-whitespace-input', {
     body: await page.screenshot({ fullPage: true }), contentType: 'image/png',
   });
 
-  test.fail(true, 'BUG-UI-01: whitespace-only values bypass required-field validation; see README');
-  await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
-  await expect(page.getByTestId('error')).toBeVisible();
+  // Keep the expected failure scoped to the known transition to the overview.
+  test.fail(true, 'BUG-UI-01: whitespace-only values open the checkout overview');
+  expect(path).toBe('/checkout-step-one.html');
 });
