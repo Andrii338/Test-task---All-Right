@@ -7,6 +7,8 @@
 Потрібні Node.js 22 LTS, npm і доступ до обох демосервісів. Версії npm-пакетів зафіксовано в `package-lock.json`.
 
 ```bash
+git clone https://github.com/Andrii338/Test-task---All-Right.git
+cd Test-task---All-Right
 nvm use                  # за наявності nvm
 npm ci
 npx playwright install chromium
@@ -87,7 +89,8 @@ BUG-UI-01 має явний `test.fail` лише після успішного �
 - 4 API-тести виконано проти реального Restful Booker успішно.
 - UI-сценарії перевірено через доступний браузер: логін, каталог, 4 сортування, reload кошика, видалення, скасування, підсумки, завершення, негативні логіни й обов’язкові поля. Докази — [browser-verification.json](docs/evidence/browser-verification.json).
 - Локальний Playwright UI runner заблокований sandbox macOS на етапі запуску Chromium: `MachPortRendezvous ... Permission denied (1100)`. Це не результат асертів UI-тестів. Див. [ui-sandbox-run.json](docs/evidence/ui-sandbox-run.json).
-- GitHub Actions ще не запускалися. Повний UI-прогін потребує звичайного локального середовища або публікації в GitHub і завершеного CI run.
+- Повний Playwright-прогін виконано в [GitHub Actions run 1](https://github.com/Andrii338/Test-task---All-Right/actions/runs/45463249651) для commit `2c3a879`: усі 9 UI- і 4 API-тести пройшли з першої спроби; BUG-UI-01 відтворився як expected failure. Несподіваних падінь, пропусків і повторних спроб немає. Runner показує `14 passed`, оскільки враховує очікуване падіння як правильний результат тесту; продуктових успішних перевірок — 13.
+- Підтверджено [артефакт зі звітами](https://github.com/Andrii338/Test-task---All-Right/actions/runs/45463249651/artifacts/14953626539); строк зберігання до 8 грудня 2026 року. Постійний підсумок — [ci-run.json](docs/evidence/ci-run.json).
 
 ## Знайдені баги
 

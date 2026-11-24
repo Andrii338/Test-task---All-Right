@@ -1,0 +1,201 @@
+{
+  "runUrl": "https://github.com/Andrii338/Test-task---All-Right/actions/runs/45463249651",
+  "runId": 45463249651,
+  "commit": "2c3a87964d188518e33e4074d420c4e709fba9b8",
+  "conclusion": "success",
+  "environment": {
+    "os": "Ubuntu 26.04.1",
+    "node": "22.23.5",
+    "playwright": "1.65.1",
+    "browser": "Chromium 159.0.8154.6"
+  },
+  "stats": {
+    "startTime": "2026-11-24T18:47:46.342Z",
+    "duration": 19210.653,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "passed": 13,
+  "expectedFailures": 1,
+  "retries": 0,
+  "tests": [
+    {
+      "title": "UI-01 standard user can log in",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 838
+        }
+      ]
+    },
+    {
+      "title": "UI-02 catalog displays six products with names prices and images",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 1040
+        }
+      ]
+    },
+    {
+      "title": "UI-03 all four catalog sort options order the full product list",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 771
+        }
+      ]
+    },
+    {
+      "title": "UI-04 cart persists on reload and removes only the selected product",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 1089
+        }
+      ]
+    },
+    {
+      "title": "UI-05 checkout calculates totals completes order and empties cart",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 1032
+        }
+      ]
+    },
+    {
+      "title": "UI-06 cancelling customer information returns to cart without losing products",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 754
+        }
+      ]
+    },
+    {
+      "title": "UI-N01 incorrect password is rejected",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 489
+        }
+      ]
+    },
+    {
+      "title": "UI-N02 empty username is rejected",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 477
+        }
+      ]
+    },
+    {
+      "title": "UI-N03 checkout requires first name last name and postal code",
+      "project": "ui",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 871
+        }
+      ]
+    },
+    {
+      "title": "API-01 authenticate create read update delete and verify absence",
+      "project": "api",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 687
+        }
+      ]
+    },
+    {
+      "title": "API-N01 invalid credentials return a reason and no token",
+      "project": "api",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 237
+        }
+      ]
+    },
+    {
+      "title": "API-N02 update without authentication is forbidden and leaves booking unchanged",
+      "project": "api",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 563
+        }
+      ]
+    },
+    {
+      "title": "API-N03 delete with invalid token is forbidden and leaves booking present",
+      "project": "api",
+      "expected": "passed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "duration": 572
+        }
+      ]
+    },
+    {
+      "title": "BUG-UI-01 checkout should reject whitespace-only customer information",
+      "project": "known-bugs",
+      "expected": "failed",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "failed",
+          "duration": 11090,
+          "error": "Error: expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/checkout-step-one\\.html$/\nReceived string:  \"https://www.saucedemo.com/checkout-step-two.html\"\nTimeout: 10000ms\n\nCall log:\n  - Expect \"toHaveURL\" with timeout 10000ms\n    24 × locator resolved to <html lang=\"en\">…</html>\n       - unexpected value \"https://www.saucedemo.com/checkout-step-two.html\"\n"
+        }
+      ]
+    }
+  ],
+  "artifact": {
+    "id": 14953626539,
+    "name": "playwright-report-1",
+    "sizeInBytes": 297641,
+    "expiresAt": "2026-12-08T18:48:05Z",
+    "url": "https://github.com/Andrii338/Test-task---All-Right/actions/runs/45463249651/artifacts/14953626539"
+  }
+}
